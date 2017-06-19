@@ -51,7 +51,11 @@ export default class Device extends React.Component {
 	}
 
 	onSelectDevice(item) {
-		this.props.onSelectDevice(item);
+		if(item !== null)
+		{
+			this.props.onSelectDevice(item);
+		}
+
 		this.stopSelecting();
 	}
 
@@ -90,6 +94,7 @@ export default class Device extends React.Component {
 					ref='menu'
 					onClick={this.onSelectDevice.bind(this)}
 					items={midiArray}
+					emptyMessage={'No ' + this.props.type + 's found'}
 				/>
 			</div>
 		)

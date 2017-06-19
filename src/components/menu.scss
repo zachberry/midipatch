@@ -36,10 +36,23 @@
 		border-radius: 0.2em;
 	}
 
+	&.is-empty
+	{
+		> li
+		{
+			opacity: 0.5;
+
+			&:hover
+			{
+				background: #1f1f1f;
+				color: inherit;
+			}
+		}
+	}
+
 	> li
 	{
 		list-style-type: none;
-		// height: 2.5em;
 		border-bottom: 1px solid #505050;
 		padding: 0.5em 2em;
 		box-sizing: border-box;

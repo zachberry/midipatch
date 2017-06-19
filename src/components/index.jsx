@@ -35,9 +35,9 @@ class Site extends React.Component {
 				<Header />
 				<div className="routings wrapper">
 					<div className="labels">
-						<div className="output-device">Output Device</div>
+						<div className="output-device">Sender</div>
 						<div className="connection">Connection</div>
-						<div className="input-device">Input Device</div>
+						<div className="input-device">Receiver</div>
 					</div>
 					{
 						this.state.routings.map( (routing, index) => {

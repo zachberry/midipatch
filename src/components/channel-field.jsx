@@ -13,7 +13,6 @@ export default class ChannelField extends React.Component {
 	}
 
 	onChange(num, event) {
-		console.log('on change', num, event.target.checked)
 		this.props.onChannelChange(num, event.target.checked)
 	}
 

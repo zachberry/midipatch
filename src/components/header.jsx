@@ -18,7 +18,7 @@ export default class Header extends React.Component
 			<header>
 				<div className="wrapper">
 					{ logo }
-					<h1>Midipipe</h1>
+					<h1>Midipatch</h1>
 					<button className='button-panic' onClick={this.panic.bind(this)}>Panic!</button>
 					<button className='button-reset' onClick={this.reset.bind(this)}>Reset</button>
 				</div>

@@ -22,7 +22,6 @@ header
 	text-align: center;
 	height: 2em;
 	margin-bottom: 1em;
-	padding-left: 2em;
 
 	> .wrapper
 	{
@@ -34,7 +33,7 @@ header
 		{
 			font-family: Poppins, Arial, sans;
 			position: absolute;
-			left: 1.5em;
+			left: 3.5rem;
 			top: 50%;
 			font-size: 1em;
 			padding: 0;
@@ -59,12 +58,13 @@ header
 			&.button-panic
 			{
 				color: #f600ff;
-				margin-right: 4em;
+				margin-right: 5rem;
 			}
 
 			&.button-reset
 			{
 				color: #ff0054;
+				margin-right: 2rem;
 			}
 
 			&:active
@@ -77,7 +77,7 @@ header
 		{
 			width: 1em;
 			position: absolute;
-			left: 0;
+			left: 2rem;
 			top: 50%;
 			transform: translate(0, -50%);
 		}

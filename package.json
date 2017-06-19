@@ -1,5 +1,5 @@
 {
-  "name": "midipipe",
+  "name": "midipatch",
   "version": "0.1.0",
   "description": "Route various MIDI devices through the browser",
   "scripts": {
@@ -10,11 +10,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zachberry/midipipe.git"
+    "url": "git+https://github.com/zachberry/midipatch.git"
   },
   "author": "Zachary Berry",
   "license": "MIT",
-  "homepage": "https://midipipe.com",
+  "homepage": "https://midipatch.com",
   "devDependencies": {
     "extract-text-webpack-plugin": "^2.0.0-beta",
     "webpack": "^2.2.1",

@@ -1,8 +1,8 @@
-# midipipe
+# midipatch
 
-midipipe is a WebMIDI-enabled site that allows you to route MIDI hardware through the browser, replacing the need for a hardware MIDI patchbay. Visit [midipipe.com](http://midipipe.com) to see it in action.
+midipatch is a WebMIDI-enabled site that allows you to route MIDI hardware through the browser, replacing the need for a hardware MIDI patchbay. Visit [midipatch.com](http://midipatch.com) to see it in action.
 
-**Note**: midipipe only works on Chrome as this is the only browser that supports the WebMIDI API!
+**Note**: midipatch only works on Chrome as this is the only browser that supports the WebMIDI API!
 
 ## Install
 

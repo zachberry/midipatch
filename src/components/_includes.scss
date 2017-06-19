@@ -1,0 +1,34 @@
+@mixin checkbox() {
+	position: relative;
+	-webkit-appearance: inherit;
+	border: none;
+	width: 1.5em;
+	height: 1.5em;
+	background: white;
+	border-radius: 0.2em;
+	cursor: pointer;
+	margin: 0;
+
+	&:hover
+	{
+		background: lighten(#ff0054, 25%);
+	}
+
+	&:checked
+	{
+		background: #ff0054;
+	}
+
+	&:checked:after
+	{
+		content: "L";
+		transform: translate(-50%, -50%) scaleX(-1) translate(-0.05em, -0.15em) rotate(-45deg);
+		font-size: 1.5em;
+		display: block;
+		color: white;
+		text-align: center;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+	}
+}

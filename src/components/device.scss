@@ -1,0 +1,49 @@
+.device
+{
+	position: relative;
+	display: inline-block;
+	background: #1f1f1f;
+	border: 1px solid black;
+	box-sizing: border-box;
+	padding: 1em;
+	text-align: center;
+	color: white;
+	cursor: pointer;
+	transition: border 0.2s, outline 0.2s;
+
+	&.is-unset,
+	&.is-missing-device
+	{
+		color: rgba(255, 255, 255, 0.5);
+	}
+
+	
+
+	&.is-not-selecting
+	{
+		> .menu
+		{
+			display: none;
+		}
+
+		&:hover
+		{
+			border: 1px solid #ff0054;
+			color: #ff0054;
+		}
+	}
+
+	&.is-selecting
+	{
+		border: 1px solid #ff0054;
+	}
+
+	> .menu
+	{
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		transform: translate(0, 115%);
+	}
+}

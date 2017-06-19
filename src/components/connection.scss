@@ -1,0 +1,48 @@
+.connection
+{
+	position: relative;
+
+	&:hover
+	{
+		> span {
+			color: #ff0054;
+		}
+		
+		> svg > path
+		{
+			stroke: #ff0054;
+		}
+	}
+
+	> svg
+	{
+		position: absolute;
+		left: 0%;
+		top: 50%;
+		right: 0%;
+		bottom: 0;
+		transform: translate(0, -50%);
+		box-sizing: border-box;
+		padding-left: 0.5em;
+		padding-right: 0.5em;
+		width: 100%;
+
+		> path
+		{
+			transition: stroke 0.2s;
+		}
+	}
+
+	> span
+	{
+		position: relative;
+		font-size: 0.6em;
+		vertical-align: middle;
+		display: inline-block;
+		width: 70%;
+		white-space: pre;
+		margin-left: 2em;
+		overflow: hidden;
+		margin-top: -0.2em;
+	}
+}

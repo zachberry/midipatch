@@ -1,0 +1,214 @@
+body
+{
+	font-size: 14pt;
+	font-family: Arimo, Arial, sans;
+	background: #303030;
+	padding: 0;
+	margin: 0;
+}
+
+.wrapper
+{
+	max-width: 55rem;
+	margin: 0 auto;
+	text-align: left;
+	padding-left: 2em;
+	padding-right: 2em;
+	box-sizing: border-box;
+}
+
+@mixin button()
+{
+	border: 1px solid #ff0054;
+	border-radius: 0.2em;
+	background: rgba(0, 0, 0, 0);
+	font-family: Poppins, Arial, sans;
+	font-size: 1em;
+	color: #ff0054;
+	height: 2em;
+	min-width: 4em;
+	transition: background 0.2s;
+	cursor: pointer;
+
+	&:hover
+	{
+		background: #ff0054;
+		color: white;
+	}
+}
+
+#site
+{
+	> .site
+	{
+		text-align: center;
+		margin-bottom: 3em;
+
+		> .routings,
+		> .button-add-routing,
+		> .loading
+		{
+			transition: opacity 1s;
+		}
+
+		&.is-not-ready-for-midi
+		{
+			> .routings,
+			> .button-add-routing
+			{
+				opacity: 0;
+			}
+
+			> .loading
+			{
+				opacity: 1;
+			}
+		}
+
+		&.is-ready-for-midi
+		{
+			> .routings,
+			> .button-add-routing
+			{
+				opacity: 1;
+			}
+
+			> .loading
+			{
+				opacity: 0;
+			}
+		}
+
+		&.is-not-editing-routing
+		{
+			> .modal-blocker
+			{
+				display: none;
+			}
+		}
+
+		> .routings
+		{
+			margin-bottom: 1.5em;
+
+			> .labels {
+				color: rgba(255, 255, 255, 0.5);
+				text-transform: lowercase;
+				margin-bottom: 1em;
+				width: 88%;
+				margin-left: auto;
+				margin-right: auto;
+
+				> *
+				{
+					display: inline-block;
+					width: 36%;
+					text-align: center;
+					font-size: 0.8em;
+
+					&:nth-child(2)
+					{
+						width: 28%;
+					}
+				}
+			}
+
+			> .routing
+			{
+				margin-bottom: 1em;
+
+				> .control
+				{
+					width: 6%;
+					display: inline-block;
+
+					&.enable
+					{
+						input
+						{
+
+						}
+					}
+
+					&.remove
+					{
+						position: relative;
+						text-align: right;
+
+						button
+						{
+							border: none;
+							background: transparent;
+							font-family: Poppins;
+							font-size: 1em;
+							color: rgba(0, 0, 0, 0);
+							width: 1.5em;
+							height: 1.6em;
+							display: inline-block;
+							cursor: pointer;
+						}
+
+						&:after
+						{
+							content: "×";
+							position: absolute;
+							right: 0%;
+							top: 50%;
+							transform: translate(0%, -50%);
+							color: rgba(255, 255, 255, 0.3);
+							width: 1.5em;
+							height: 1.5em;
+							vertical-align: middle;
+							text-align: center;
+							transition: background 0.2s;
+							pointer-events: none;
+							line-height: 1.4em;
+						}
+
+						&:hover:after
+						{
+							background: #ff0054;
+							color: white;
+						}
+					}
+				}
+
+				> .device
+				{
+					width: 32%;
+				}
+
+				> .connection
+				{
+					display: inline-block;
+					width: 24%;
+					color: white;
+				}
+			}
+		}
+
+		> .button-add-routing
+		{
+			@include button();
+
+			margin: 0 auto;
+		}
+
+		> .loading
+		{
+			color: white;
+			text-align: center;
+			font-size: 2em;
+		}
+
+		> .modal-blocker
+		{
+			position: fixed;
+			left: 0;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			background: rgba(0, 0, 0, 0.2);
+		}
+	}
+}

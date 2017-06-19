@@ -1,0 +1,85 @@
+@mixin link-button()
+{
+	background: transparent;
+	border: none;
+	font-weight: 700;
+	font-family: Poppins;
+	font-size: 1em;
+
+	&:hover
+	{
+		text-decoration: underline;
+	}
+}
+
+header
+{
+	color: white;
+	background: #222222;
+	font-weight: 700;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+	text-transform: lowercase;
+	text-align: center;
+	height: 2em;
+	margin-bottom: 1em;
+	padding-left: 2em;
+
+	> .wrapper
+	{
+		position: relative;
+		text-align: right;
+		height: 100%;
+
+		> h1
+		{
+			font-family: Poppins, Arial, sans;
+			position: absolute;
+			left: 1.5em;
+			top: 50%;
+			font-size: 1em;
+			padding: 0;
+			margin: 0;
+			transform: translate(0, -50%);
+		}
+
+		> button
+		{
+			@include link-button();
+
+			font-size: 0.6em;
+			text-transform: lowercase;
+			cursor: pointer;
+			position: absolute;
+			right: 0;
+			top: 50%;
+			transform: translate(0, -50%);
+			padding: 0;
+			transition: transform 0.2s;
+
+			&.button-panic
+			{
+				color: #f600ff;
+				margin-right: 4em;
+			}
+
+			&.button-reset
+			{
+				color: #ff0054;
+			}
+
+			&:active
+			{
+				transform: scale(1.2) translate(0, -50%);
+			}
+		}
+
+		> svg
+		{
+			width: 1em;
+			position: absolute;
+			left: 0;
+			top: 50%;
+			transform: translate(0, -50%);
+		}
+	}
+}

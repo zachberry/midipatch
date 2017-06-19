@@ -1,0 +1,65 @@
+@import './includes';
+
+.routing
+{
+	position: relative;
+
+	.device
+	{
+		outline: 1px solid rgba(0, 180, 255, 0);
+	}
+
+	.connection
+	{
+		cursor: pointer;
+	}
+
+	&.is-status-sent
+	{
+		.device
+		{
+			outline: 1px solid #00b4ff;
+		}
+
+		.connection > svg > path
+		{
+			stroke: #00b4ff;
+		}
+	}
+
+	&.is-status-blocked
+	{
+		.device.is-output
+		{
+			outline: 1px solid rgba(0, 180, 255, 0.75);
+		}
+	}
+
+	.connection-menu
+	{
+		position: absolute;
+		left: 50%;
+		bottom: 0;
+		transform: translate(-50%, 100%) translate(0, 1em);
+	}
+
+	> .control.enable > input
+	{
+		@include checkbox();
+
+		position: absolute;
+		left: 0;
+		top: 50%;
+		transform: translate(0, -50%);
+	}
+
+	&.is-disabled
+	{
+		.device,
+		.connection
+		{
+			opacity: 0.3;
+			pointer-events: none;
+		}
+	}
+}

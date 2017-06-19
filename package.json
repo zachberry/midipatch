@@ -1,0 +1,35 @@
+{
+  "name": "midipipe",
+  "version": "0.1.0",
+  "description": "Route various MIDI devices through the browser",
+  "scripts": {
+    "start": "npm run serve | npm run dev",
+    "serve": "./node_modules/http-server/bin/http-server -p 8082",
+    "dev": "webpack-dev-server --progress --colors --port 8092",
+    "build": "webpack -p"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zachberry/midipipe.git"
+  },
+  "author": "Zachary Berry",
+  "license": "MIT",
+  "homepage": "https://midipipe.com",
+  "devDependencies": {
+    "extract-text-webpack-plugin": "^2.0.0-beta",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "webpack": "^2.2.1",
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "http-server": "^0.9.0",
+    "style-loader": "^0.13.1",
+    "css-loader": "^0.26.1",
+    "sass-loader": "^6.0.2",
+    "node-sass": "^4.5.0"
+  }
+}

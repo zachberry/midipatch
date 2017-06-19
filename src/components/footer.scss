@@ -1,0 +1,30 @@
+footer
+{
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
+	color: rgba(255, 255, 255, 0.3);
+	padding: 0.2em 0;
+	box-sizing: border-box;
+	background: #303030;
+	padding: 0.4em;
+	
+	> .wrapper
+	{
+		font-size: 0.6em;
+		text-align: center;
+	
+		> a
+		{
+			color: rgba(255, 255, 255, 0.3);
+			text-decoration: none;
+
+			&:hover
+			{
+				text-decoration: underline;
+			}
+		}
+	}
+}

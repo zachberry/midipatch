@@ -1,0 +1,104 @@
+@import './includes';
+
+.connection-menu {
+	color: white;
+	background: #1f1f1f;
+	padding: 1em;
+	box-sizing: border-box;
+	line-height: 1em;
+	width: 22em;
+	border: 1px solid #505050;
+	position: relative;
+	border-radius: 0.2em;
+	z-index: 200;
+
+	&:before
+	{
+		content: " ";
+		width: 2em;
+		height: 2em;
+		position: absolute;
+		left: 50%;
+		top: 0;
+		transform: rotate(45deg) translate(-50%, 0);
+		display: block;
+		background: #1f1f1f;
+		border: 1px solid #505050;
+	}
+
+	&:after
+	{
+		content: " ";
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		background: #1f1f1f;
+		display: block;
+		border-radius: 0.2em;
+	}
+
+	> div
+	{
+		min-height: 3em;
+		position: relative;
+		z-index: 2;
+
+		&:last-child
+		{
+			min-height: 2em;
+		}
+
+		> input
+		{
+			position: absolute;
+			right: 0;
+			top: 0;
+			font-family: Arimo;
+			font-size: 0.8em;
+			border: none;
+			padding: 0.2em 0.5em;
+			border-radius: 0.2em;
+
+			&:disabled
+			{
+				opacity: 0.3;
+			}
+		}
+	}
+
+	> * > label
+	{
+		font-size: 0.7em;
+		width: 15em;
+		display: inline-block;
+		vertical-align: top;
+		position: relative;
+		cursor: pointer;
+
+		> input
+		{
+			@include checkbox();
+
+			position: absolute;
+			top: 0.25em;
+			left: 0;
+		}
+
+		> span
+		{
+			padding-left: 2em;
+			padding-top: 0.15em;
+			display: inline-block;
+		}
+	}
+
+	> * > .channel-field
+	{
+		display: inline-block;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+}

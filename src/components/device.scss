@@ -9,7 +9,7 @@
 	text-align: center;
 	color: white;
 	cursor: pointer;
-	transition: border 0.2s, outline 0.2s;
+	transition: border 0.2s, outline 0.2s, color 0.2s;
 
 	&.is-unset,
 	&.is-missing-device

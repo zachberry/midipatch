@@ -47,7 +47,7 @@
 
 		&:last-child
 		{
-			min-height: 2em;
+			min-height: 4em;
 		}
 
 		> input
@@ -94,7 +94,8 @@
 		}
 	}
 
-	> * > .channel-field
+	> * > .channel-field,
+	> * > .message-filter-field
 	{
 		display: inline-block;
 		position: absolute;

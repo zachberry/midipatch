@@ -1,0 +1,20 @@
+@import './connection-field';
+
+.message-filter-field
+{
+	@include connection-field();
+
+	label
+	{
+		height: 1.5em;
+		width: 23%;
+		margin-right: 3px;
+	}
+
+	span
+	{
+		width: 100%;
+		height: 100%;
+		font-size: 0.8em;
+	}
+}

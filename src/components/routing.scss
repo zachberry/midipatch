@@ -29,6 +29,11 @@
 
 	&.is-status-blocked
 	{
+		.connection > svg > path
+		{
+			stroke: #ff0054;
+		}
+
 		.device.is-output
 		{
 			outline: 1px solid rgba(0, 180, 255, 0.75);

@@ -1,6 +1,7 @@
 require('./connection-menu.scss');
 
 import ChannelField from './channel-field';
+import MessageFilterField from './message-filter-field';
 import appState from '../stores/app-state'
 
 export default class ConnectionMenu extends React.Component {
@@ -9,6 +10,13 @@ export default class ConnectionMenu extends React.Component {
 
 		allowedChannels[channelNum - 1] = newValue || null;
 		appState.setConnectionOptions(this.props.model, { allowedChannels });
+	}
+
+	onWhitelistItemSelected(propName, isEnabled) {
+		let whitelist = Object.assign({}, this.props.model.connectionWhitelist);
+
+		whitelist[propName] = isEnabled;
+		appState.setConnectionOptions(this.props.model, { whitelist });
 	}
 
 	onMergeToChannelChange(mergeToChannel) {
@@ -60,6 +68,13 @@ export default class ConnectionMenu extends React.Component {
 						<span>Transpose notes by:</span>
 					</label>
 					<input type='number' disabled={enabled.indexOf('transpose') === -1} onChange={this.onTransposeChange.bind(this)} min='-60' max='60' step='1' value={model.connectionTranspose} />
+				</div>
+				<div className='whitelist'>
+					<label>
+						<input type='checkbox' onChange={this.onOptionEnabledChange.bind(this, 'whitelist')} checked={enabled.indexOf('whitelist') !== -1} />
+						<span>Allow these messages only [IDEA - flash the message type and midi channel in this menu of the message]:</span>
+					</label>
+					<MessageFilterField disabled={enabled.indexOf('whitelist') === -1} selected={model.connectionWhitelist} onItemSelected={this.onWhitelistItemSelected.bind(this)} />
 				</div>
 			</div>
 		)

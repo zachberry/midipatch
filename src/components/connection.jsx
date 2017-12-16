@@ -63,6 +63,11 @@ export default class Connection extends React.Component {
 			label += '\n' + additionalOpts.join(', ');
 		}
 
+		if(routing.connectionEnabledOptions.indexOf('whitelist') !== -1)
+		{
+			label = "*" + label;
+		}
+
 		return label;
 	}
 

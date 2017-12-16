@@ -1,6 +1,6 @@
 {
   "name": "midipatch",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Route various MIDI devices through the browser",
   "scripts": {
     "start": "npm run serve | npm run dev",

@@ -10,7 +10,7 @@ export default class MIDI {
 
 		if(navigator.requestMIDIAccess)
 		{
-			navigator.requestMIDIAccess().then(this.onMIDISuccess.bind(this), this.onMIDIFailure.bind(this))
+			navigator.requestMIDIAccess({ sysex:true }).then(this.onMIDISuccess.bind(this), this.onMIDIFailure.bind(this))
 		}
 		else
 		{
@@ -21,14 +21,16 @@ export default class MIDI {
 	get isReady() {
 		return this.midiAccess !== null;
 	}
-	
+
 	onMIDIFailure()
 	{
+		console.error(arguments);
 		alert('ERROR: Could not connect to MIDI');
 	}
 
 	onMIDIUnsupported()
 	{
+		console.error(arguments);
 		alert('ERROR: Browser does not support MIDI');
 	}
 
@@ -76,16 +78,75 @@ export default class MIDI {
 	}
 
 	getMidiMessageValues(data) {
+		let status1 = data[0] >> 4;
+		let status2 = data[0] & 0x0F;
+
+		if(status1 === 0xF)
+		{
+			return ({
+				type: 'system',
+				command: status2,
+				channel: null,
+				value1: data[1],
+				value2: data[2]
+			})
+		}
+
 		return ({
-			command: data[0] >> 4,
-			channel: data[0] & 0x0F,
-			noteNumber: data[1],
-			value: data[2]
+			type: 'channel',
+			command: status1,
+			channel: status2,
+			value1: data[1],
+			value2: data[2]
 		});
 	}
 
-	composeMidiMessageData(command, channel, noteNumber, value) {
-		return [command << 4 | channel, noteNumber, value];
+	getMidiCommandType(messageObject) {
+		switch(messageObject.type === 'system' ? 0xF0 | messageObject.command : messageObject.command << 4)
+		{
+			case 0x80: return 'noteOn';
+			case 0x90: return 'noteOff';
+			case 0xA0: return 'aftertouchPolyKeyPressure';
+			case 0xB0: return 'controlChange';
+			case 0xC0: return 'programChange';
+			case 0xD0: return 'aftertouchChannelPressure';
+			case 0xE0: return 'pitchBend';
+			case 0xF0: return 'sysex';
+			case 0xF7: return 'sysexEnd';
+			case 0xF1: return 'midiTimeCode';
+			case 0xF2: return 'songPositionPointer';
+			case 0xF3: return 'songSelect';
+			case 0xF6: return 'tuneRequest';
+			case 0xF8: return 'clock';
+			case 0xFA: return 'start';
+			case 0xFB: return 'continue';
+			case 0xFC: return 'stop';
+			case 0xFE: return 'activeSensing';
+			case 0xFF: return 'reset';
+		}
+
+		return null;
+	}
+
+	composeMidiMessageData(messageObjectOrStatus1, status2, value1, value2) {
+		if(typeof messageObjectOrStatus1 === 'object')
+		{
+			let msg = messageObjectOrStatus1;
+
+			if(msg.type === 'system')
+			{
+				return [0xF0 | msg.command, msg.value1, msg.value2];
+			}
+			else
+			{
+				return [msg.command << 4 | msg.channel, msg.value1, msg.value2];
+			}
+		}
+
+		if(typeof messageObjectOrStatus1 === 'number')
+		{
+			return [messageObjectOrStatus1 << 4 | status2, value1, value2];
+		}
 	}
 
 	sendNoteOffToAllDevices() {

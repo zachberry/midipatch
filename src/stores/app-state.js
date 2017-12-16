@@ -14,6 +14,24 @@ class AppState {
 			connectionMergeToChannel: 1,
 			connectionForceVelocity: 127,
 			connectionTranspose: 0,
+			connectionWhitelist: {
+				note: false,
+				pitchBend: false,
+				aftertouch: false,
+				controlChange: false,
+				programChange: false,
+				sysex: false,
+				midiTimeCode: false,
+				songPositionPointer: false,
+				songSelect: false,
+				tuneRequest: false,
+				clock: false,
+				start: false,
+				continue: false,
+				stop: false,
+				activeSensing: false,
+				reset: false
+			},
 			connectionCustomMapping: null
 		})
 	}
@@ -63,7 +81,7 @@ class AppState {
 		this.deviceToRoutings.clear();
 		this.state.routings.forEach( (routing) => {
 			let device = this.midi.getOutputDeviceById(routing.outputDeviceId);
-			
+
 			if(device)
 			{
 				this.deviceToRoutings.add(device, routing);
@@ -86,7 +104,7 @@ class AppState {
 		this.clearMessageCallback(routing);
 
 		routing.outputDeviceId = device.id;
-		
+
 		this.addMessageCallback(routing);
 		this.onUpdate();
 	}
@@ -114,7 +132,7 @@ class AppState {
 		if(routing.outputDeviceId === null) return;
 
 		let outputDevice = this.midi.getOutputDeviceById(routing.outputDeviceId);
-		
+
 		if(outputDevice) outputDevice.onmidimessage = null;
 	}
 
@@ -127,8 +145,34 @@ class AppState {
 	}
 
 	// channels = null is OMNI mode (aka any channel)
+	// system type message have no channel specified
 	isMIDIDataInChannels(midiData, channels) {
-		return channels[midiData.channel] === true;
+		return midiData.type === 'system' || channels[midiData.channel] === true;
+	}
+
+	isMIDIDataInWhitelist(midiData, whitelist) {
+		switch(this.midi.getMidiCommandType(midiData))
+		{
+			case 'noteOn': return whitelist.note;
+			case 'noteOff': return whitelist.note;
+			case 'aftertouchPolyKeyPressure': return whitelist.aftertouch;
+			case 'controlChange': return whitelist.controlChange;
+			case 'programChange': return whitelist.programChange;
+			case 'aftertouchChannelPressure': return whitelist.aftertouch;
+			case 'pitchBend': return whitelist.pitchBend;
+			case 'sysex': return whitelist.sysex;
+			case 'sysexEnd': return whitelist.sysex;
+			case 'midiTimeCode': return whitelist.midiTimeCode;
+			case 'songPositionPointer': return whitelist.songPositionPointer;
+			case 'songSelect': return whitelist.songSelect;
+			case 'tuneRequest': return whitelist.tuneRequest;
+			case 'clock': return whitelist.clock;
+			case 'start': return whitelist.start;
+			case 'continue': return whitelist.continue;
+			case 'stop': return whitelist.stop;
+			case 'activeSensing': return whitelist.activeSensing;
+			case 'reset': return whitelist.reset;
+		}
 	}
 
 	isOptionEnabled(routing, opt) {
@@ -154,7 +198,6 @@ class AppState {
 			// it's destination:
 			if(routing.connectionEnabledOptions.length === 0)
 			{
-				midiData = this.midi.getMidiMessageValues(message.data);
 				this.sendMIDI(routing, message.data);
 				return;
 			}
@@ -165,16 +208,21 @@ class AppState {
 				Events.emit('midi:message', 'blocked', routing)
 				return;
 			}
+			if(this.isOptionEnabled(routing, 'whitelist') && !this.isMIDIDataInWhitelist(midiData, routing.connectionWhitelist))
+			{
+				Events.emit('midi:message', 'blocked', routing)
+				return;
+			}
 
 			this.transformMIDIData(routing, midiData);
 
 			this.sendMIDI(
 				routing,
-				this.midi.composeMidiMessageData(midiData.command, midiData.channel, midiData.noteNumber, midiData.value)
+				this.midi.composeMidiMessageData(midiData)
 			);
 		})
 
-		
+
 	}
 
 	sendMIDI(routing, data)
@@ -247,7 +295,8 @@ class AppState {
 			connectionAllowedChannels: opts.allowedChannels || routing.connectionAllowedChannels,
 			connectionMergeToChannel: opts.mergeToChannel || routing.connectionMergeToChannel,
 			connectionForceVelocity: opts.forceVelocity || routing.connectionForceVelocity,
-			connectionTranspose: opts.transpose || routing.connectionTranspose
+			connectionTranspose: opts.transpose || routing.connectionTranspose,
+			connectionWhitelist: opts.whitelist || routing.connectionWhitelist
 		});
 		this.onUpdate();
 	}

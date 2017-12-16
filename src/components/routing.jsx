@@ -6,7 +6,7 @@ import ConnectionMenu from './connection-menu';
 import appState from '../stores/app-state';
 import Events from '../events';
 
-const MIDI_MESSAGE_TIMEOUT_MS = 100;
+const MIDI_MESSAGE_TIMEOUT_MS = 150;
 
 export default class Routing extends React.Component {
 	constructor() {
@@ -34,7 +34,7 @@ export default class Routing extends React.Component {
 			MIDI_MESSAGE_TIMEOUT_MS
 		);
 	}
-	
+
 	onEnableChange(event) {
 		appState.setRoutingEnabled(this.props.model, !this.props.model.enabled);
 	}

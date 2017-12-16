@@ -7,7 +7,7 @@
 		> span {
 			color: #ff0054;
 		}
-		
+
 		> svg > path
 		{
 			stroke: #ff0054;
@@ -27,10 +27,10 @@
 		padding-right: 0.5em;
 		width: 100%;
 
-		> path
-		{
-			transition: stroke 0.2s;
-		}
+		// > path
+		// {
+		// 	transition: stroke 0.2s;
+		// }
 	}
 
 	> span
@@ -44,6 +44,6 @@
 		margin-left: 2em;
 		overflow: hidden;
 		margin-top: -0.2em;
-		transition: color 0.2s;
+		// transition: color 0.2s;
 	}
 }

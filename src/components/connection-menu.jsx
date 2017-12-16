@@ -72,7 +72,7 @@ export default class ConnectionMenu extends React.Component {
 				<div className='whitelist'>
 					<label>
 						<input type='checkbox' onChange={this.onOptionEnabledChange.bind(this, 'whitelist')} checked={enabled.indexOf('whitelist') !== -1} />
-						<span>Allow these messages only [IDEA - flash the message type and midi channel in this menu of the message]:</span>
+						<span>Allow these messages only:</span>
 					</label>
 					<MessageFilterField disabled={enabled.indexOf('whitelist') === -1} selected={model.connectionWhitelist} onItemSelected={this.onWhitelistItemSelected.bind(this)} />
 				</div>

@@ -36,21 +36,6 @@ export default class MessageFilterField extends React.Component {
 	render() {
 		let disabled = this.props.disabled;
 
-		// Note On
-		// Note Off
-		// Poly Key Aftertouch
-		// CC
-		// Prog Ch
-		// Chan Pressure Aftertouch
-		// Pitch bend
-		// sysex
-		// midi time code
-		// song position
-		// song select
-		// tune request
-
-		// Clock only
-
 		return (
 
 			<div className={

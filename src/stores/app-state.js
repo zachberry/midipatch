@@ -248,17 +248,21 @@ class AppState {
 
 		switch(midiData.command)
 		{
-			case 0x8: // note off
 			case 0x9: // note on
-			case 0xA: // poly key pressure
 				// force velocity
-				if(this.isOptionEnabled(routing, 'forceVelocity'))
+				// we don't transform velocity if it's 0 (meaning it's a fake note off event)
+				if(this.isOptionEnabled(routing, 'forceVelocity') && midiData.value2 > 0)
 				{
-					midiData.value = parseInt(routing.connectionForceVelocity, 10);
+					midiData.value2 = parseInt(routing.connectionForceVelocity, 10);
 				}
 
+			case 0x8: // note off
+			case 0xA: // poly key pressure
 				// transpose
-				midiData.noteNumber += parseInt(routing.connectionTranspose, 10);
+				if(this.isOptionEnabled(routing, 'transpose'))
+				{
+					midiData.value1 += parseInt(routing.connectionTranspose, 10);
+				}
 		}
 
 		// custom mapping (@TODO)
